@@ -1,6 +1,9 @@
 'use client';
 
+import { useState } from 'react';
+
 export default function Home() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const services = [
     { name: 'Haircut & Styling', price: '$45-85', description: 'Professional cuts and styling' },
     { name: 'Hair Coloring', price: '$65-150', description: 'Full color, highlights, balayage' },
@@ -15,15 +18,68 @@ export default function Home() {
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex justify-between items-center h-16">
             <div className="text-2xl font-serif text-gray-900">aesthetics_hair_salon</div>
+
+            {/* Desktop Navigation */}
             <div className="hidden md:flex space-x-8">
               <a href="#home" className="text-gray-700 hover:text-gray-900 transition-colors">Home</a>
               <a href="#services" className="text-gray-700 hover:text-gray-900 transition-colors">Services</a>
               <a href="#about" className="text-gray-700 hover:text-gray-900 transition-colors">About</a>
               <a href="#contact" className="text-gray-700 hover:text-gray-900 transition-colors">Contact</a>
             </div>
-            <button className="bg-gray-900 text-white px-6 py-2 rounded-full hover:bg-gray-800 transition-colors">
+
+            {/* Desktop Book Button */}
+            <button className="hidden md:block bg-gray-900 text-white px-6 py-2 rounded-full hover:bg-gray-800 transition-colors">
               Book Now
             </button>
+
+            {/* Mobile Menu Button */}
+            <button
+              className="md:hidden p-2 rounded-lg hover:bg-gray-100 transition-colors"
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+              <div className="w-6 h-6 relative">
+                <span className={`absolute w-6 h-0.5 bg-gray-900 transition-all duration-300 ${isMenuOpen ? 'rotate-45 translate-y-1/2' : 'translate-y-0'}`}></span>
+                <span className={`absolute w-6 h-0.5 bg-gray-900 transition-all duration-300 ${isMenuOpen ? 'opacity-0' : 'translate-y-2'}`}></span>
+                <span className={`absolute w-6 h-0.5 bg-gray-900 transition-all duration-300 ${isMenuOpen ? '-rotate-45 translate-y-1/2' : 'translate-y-4'}`}></span>
+              </div>
+            </button>
+          </div>
+
+          {/* Mobile Menu */}
+          <div className={`md:hidden overflow-hidden transition-all duration-300 ${isMenuOpen ? 'max-h-96 pb-4' : 'max-h-0'}`}>
+            <div className="pt-4 pb-2 space-y-3">
+              <a
+                href="#home"
+                className="block px-3 py-2 text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Home
+              </a>
+              <a
+                href="#services"
+                className="block px-3 py-2 text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Services
+              </a>
+              <a
+                href="#about"
+                className="block px-3 py-2 text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                About
+              </a>
+              <a
+                href="#contact"
+                className="block px-3 py-2 text-gray-700 hover:text-gray-900 hover:bg-gray-50 rounded-lg transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                Contact
+              </a>
+              <button className="w-full bg-gray-900 text-white px-6 py-2 rounded-full hover:bg-gray-800 transition-colors mt-4">
+                Book Now
+              </button>
+            </div>
           </div>
         </div>
       </nav>
